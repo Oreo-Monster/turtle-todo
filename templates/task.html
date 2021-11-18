@@ -1,0 +1,10 @@
+<div class="task" id="task{{idx}}">
+<div class="round">
+<input type="checkbox" {{checked}} id="task{{idx}}checkbox" class="check">
+<label for="task{{idx}}checkbox"></label>
+</div>
+<p for="task{{idx}}checkbox" class="taskText">{{taskText}}</p>
+<form method="post" id="deleteTask">
+<button class="deleteButton" name="deleteButton" id="{{idx}}">Delete</button>
+</form>
+</div>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='home.css') }}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap" rel="stylesheet"> 
+    <title>Turtle</title>
+</head>
+<body>
+    <h1>Turtle</h1>
+    <div id="Clock"></div>
+    <script src="{{ url_for('static',filename='clock.js') }}"></script>
+    <form action="/add" method="post" id="addTask">
+        <div>
+            <input type="text" name="todo_text" id="todo_input" placeholder="ToDo...">
+            <select name=priorety id='prioretySelector'>
+              <option value="none">Priorety</option>
+              <option value='low'>Low</option>
+              <option value='medium'>Medium</option>
+              <option value='high'>High</option>
+            </select>
+            <button id="add">Add</button>
+        </div>
+    </form>
+    <div class='spacer layer1'></div>
+    <div id="todo_list_container">
+        <!-- 
+          Task parameters are passed in a list 
+          with following the following inecies:
+          0: task
+          1: tag
+          2: priority
+          3: color
+          4: creationTime
+          5: completed
+          6: idx
+        -->
+        {% for todo in todos %}
+          <div class="task" id="task{{todo[6]}}", style='background-color:{{todo[3]}};'>
+
+            <div class="round">
+              <input type="checkbox" onchange="checkTask({{todo[6]}})" {{todo[5]}} id="task{{todo[6]}}checkbox" class="check">
+              <label for="task{{todo[6]}}checkbox"></label>
+            </div>
+            <div for="task{{todo[6]}}checkbox" class="taskText">{{todo[0]|safe}}</div>
+            <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <a class="deleteButton", href='/delete/{{todo[6]}}'>
+                <circle cx="17.5" cy="17.5" r="17.5"/>
+                <path d="M28.0002 12.0085V10.4135C27.9702 9.83632 27.7445 9.35024 27.3232 8.9553C26.9019 8.56036 26.4054 8.36289 25.8337 8.36289H23.6672V7.63377C23.6672 7.02617 23.4566 6.50971 23.0353 6.08439C22.614 5.65907 22.1025 5.44641 21.5007 5.44641H14.2789C13.6771 5.44641 13.1655 5.65907 12.7443 6.08439C12.323 6.50971 12.1124 7.02617 12.1124 7.63377V8.36289H9.94584C9.37412 8.36289 8.87762 8.56036 8.45636 8.9553C8.03509 9.35024 7.80941 9.83632 7.77932 10.4135V12.0085C7.77932 12.4034 7.92224 12.7452 8.2081 13.0338C8.49395 13.3224 8.83247 13.4667 9.22367 13.4667V25.8618C9.22367 26.682 9.502 27.3732 10.0587 27.9352C10.6153 28.4973 11.2999 28.7783 12.1124 28.7783H23.6672C24.4796 28.7783 25.1642 28.4972 25.7209 27.9352C26.2776 27.3732 26.5559 26.682 26.5559 25.8618V13.4667C26.9471 13.4667 27.2856 13.3224 27.5715 13.0338C27.8573 12.7452 28.0003 12.4034 28.0002 12.0085V12.0085ZM26.5559 12.0085H9.22367V10.5503C9.22367 10.3376 9.29138 10.1629 9.42679 10.0262C9.56221 9.88947 9.73523 9.82111 9.94587 9.82111H25.8337C26.0444 9.82111 26.2174 9.88947 26.3528 10.0262C26.4882 10.1629 26.5559 10.3376 26.5559 10.5503V12.0085H26.5559ZM25.1115 25.8618C25.1115 26.2567 24.9686 26.5985 24.6828 26.8871C24.3969 27.1757 24.0584 27.32 23.6672 27.32H12.1124C11.7212 27.32 11.3827 27.1757 11.0968 26.8871C10.8109 26.5985 10.668 26.2567 10.668 25.8618V13.4667H25.1115V25.8618V25.8618ZM23.6672 25.1327V15.6541C23.6672 15.4414 23.5995 15.2667 23.4641 15.13C23.3286 14.9933 23.1556 14.9249 22.945 14.9249H21.5006C21.29 14.9249 21.117 14.9933 20.9816 15.13C20.8461 15.2667 20.7784 15.4414 20.7784 15.6541V25.1327C20.7784 25.3453 20.8461 25.52 20.9816 25.6567C21.117 25.7934 21.29 25.8618 21.5006 25.8618H22.945C23.1556 25.8618 23.3286 25.7934 23.4641 25.6567C23.5995 25.52 23.6672 25.3453 23.6672 25.1327ZM22.945 25.1327H21.5007V15.6541H22.945V25.1327V25.1327ZM22.2228 8.36289H13.5567V7.63377C13.5567 7.42111 13.6244 7.24642 13.7598 7.1097C13.8953 6.97299 14.0683 6.90463 14.2789 6.90463H21.5007C21.7113 6.90463 21.8843 6.97299 22.0198 7.1097C22.1552 7.24642 22.2229 7.42111 22.2229 7.63377V8.36289H22.2228ZM19.3341 25.1327V15.6541C19.3341 15.4414 19.2664 15.2667 19.131 15.13C18.9956 14.9933 18.8226 14.9249 18.6119 14.9249H17.1676C16.9569 14.9249 16.7839 14.9933 16.6485 15.13C16.5131 15.2667 16.4454 15.4414 16.4454 15.6541V25.1327C16.4454 25.3453 16.5131 25.52 16.6485 25.6567C16.7839 25.7934 16.9569 25.8618 17.1676 25.8618H18.6119C18.8226 25.8618 18.9956 25.7934 19.131 25.6567C19.2664 25.52 19.3341 25.3453 19.3341 25.1327ZM18.612 25.1327H17.1676V15.6541H18.612V25.1327ZM15.0011 25.1327V15.6541C15.0011 15.4414 14.9334 15.2667 14.798 15.13C14.6625 14.9933 14.4895 14.9249 14.2789 14.9249H12.8345C12.6239 14.9249 12.4509 14.9933 12.3154 15.13C12.18 15.2667 12.1123 15.4414 12.1123 15.6541V25.1327C12.1123 25.3453 12.18 25.52 12.3154 25.6567C12.4509 25.7934 12.6239 25.8618 12.8345 25.8618H14.2789C14.4895 25.8618 14.6625 25.7934 14.798 25.6567C14.9334 25.52 15.0011 25.3453 15.0011 25.1327ZM14.2789 25.1327H12.8345V15.6541H14.2789V25.1327Z" fill="black"/>
+              </a>
+            </svg>
+          </div>
+          <p class="taskTime">{{todo[4]}}</p>
+          <br>
+        {% endfor %}
+        <!--This script handles sending post request when task is checked-->
+        <script>
+          function checkTask(i){
+            console.log('hello')
+            const HTTP = new XMLHttpRequest();
+            const url = "/check/"+i;
+            HTTP.open("POST", url);
+            HTTP.send();
+          }
+        </script>
+    </div>
+</body>
+</html>

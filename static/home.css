@@ -1,0 +1,183 @@
+body {
+    background-color: #003554;
+    margin: 0;
+    font-family: 'PT Sans Caption', sans-serif;
+}
+
+h1 {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 0.4em;
+    align-items: center;
+    display: flex;
+    width: 140px;
+    background-color: #006494;
+}
+
+.spacer {
+    aspect-ratio: 960/150;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.layer1 {
+    background-image: url('./wave_spacer.svg');
+}
+
+#add {
+    background-color: #467692;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0.25em 1em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#add:hover {
+    background-color: #00A6FB;
+}
+
+#prioretySelector{
+    background-color: #467692;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 0.3em;
+    padding: 0.25em 0.3em;
+    transition: background-color 0.2s ease-in-out;
+    width:92px;
+}
+
+#todo_input {
+    background-color: #003554;
+    border-style: none none solid none;;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0em 0.5em;
+    transition: background-color 0.2s ease-in-out;
+    margin-left: 1vw;
+    margin-right: 0.3em;
+    width: 78%;
+    
+}
+
+input:focus {outline-style: none; }
+
+.task {
+    border-radius: 20px;
+    padding: 0.4em;
+    align-items: center;
+    display: flex;
+    margin-left: 1vw;
+    margin-right: 2vw;
+}
+
+.taskText {
+    display: inline-block;
+    width: 90vw;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.tag {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    width: min-content;
+    padding: 1px 6px 1px 5px;
+    display: inline;
+}
+
+
+.round {
+    position: relative;
+    
+}
+
+.round label {
+    border: 2px solid #051923;
+    opacity: 50%;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: -6px;
+    width: 28px;
+}
+  
+.round label:after {
+    border: 2px solid #fff;
+    opacity: 100%;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    left: 7px;
+    opacity: 0;
+    position: absolute;
+    top: 8px;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+
+.round input[type="checkbox"] {
+    visibility: hidden;
+  }
+  
+.round input[type="checkbox"]:checked + label {
+    background-color: #00A6FB;
+    border-color: #00A6FB;
+    opacity: 1;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+
+.taskTime {
+    color: #82cff5;
+    margin:2px;
+    position: relative;
+    width: 200px;
+    background-color: #00659463;
+    
+    border-radius: 20px;
+    padding: 0.4em;
+    align-items: center;
+    display: flex;
+    margin-left: 1%
+}
+.taskTime p{
+    color:#00A6FB;
+}
+
+#Clock{
+    color: #00A6FB;
+    opacity: 40%;
+    position: relative;
+    margin-left: 2vw;
+}
+
+.deleteButton circle {
+    fill: #00A6FB;
+    transition: fill 0.2s ease;
+    opacity: 75%;
+}
+
+.deleteButton circle:hover {
+    fill: #FF0000;
+}
