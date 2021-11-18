@@ -1,4 +1,4 @@
-from index import *
+from app import *
 
 web_path = 'http://http://127.0.0.1:5000/'
 
